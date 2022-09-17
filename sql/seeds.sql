@@ -1,13 +1,13 @@
 import { v4 as uuid } from 'uuid';
 
 INSERT INTO department() 
-VALUES (uuid(), name),
-        (uuid(), name),
-        (uuid(), name),
-        (uuid(), name);
+VALUES (uuid(), Engineering),
+        (uuid(), Finance),
+        (uuid(), Legal),
+        (uuid(), Sales);
 
 INSERT INTO role ()
-VALUES (uuid(), title, salary, department_id),
+VALUES (uuid(), "Lead Engineer", 150000.00, department_id),
         (uuid(), title, salary, department_id);
 
 INSERT INTO employee()
