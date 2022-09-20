@@ -1,6 +1,5 @@
 const mysql = require("mysql2");
 const dotenv = require("dotenv");
-const fs = require("fs");
 
 dotenv.config()
 
@@ -12,7 +11,4 @@ const connection = mysql.createConnection({
     port: process.env.MYSQL_PORT
 })
 
-//! const seed = fs.readFileSync("../sql/seeds.sql", {encoding: "UTF-8"})
-
-
-  module.exports = connection;
+module.exports = connection;
