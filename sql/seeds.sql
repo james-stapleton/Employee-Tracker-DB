@@ -8,8 +8,9 @@ VALUES (uuid(), Engineering),
 
 INSERT INTO role ()
 VALUES (uuid(), "Lead Engineer", 150000.00, department_id),
-        (uuid(), title, salary, department_id);
+        (uuid(), "Engineer", 100000.00, department_id);
 
 INSERT INTO employee()
-VALUES (uuid(), first_name, last_name, role_id, manager_id),
-        (uuid(), first_name, last_name, role_id, manager_id);
+VALUES (uuid(), "James", "Stapleton", role_id, manager_id),
+        (uuid(), "Joe", "Smith", role_id, manager_id),
+        (uuid(), "Jane", "Smith", role_id, manager_id);

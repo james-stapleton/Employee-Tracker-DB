@@ -1,4 +1,5 @@
 const inquirer = require("inquirer");
+const sql = require("mysql2");
 
 const menu = [{
     type: "list",
