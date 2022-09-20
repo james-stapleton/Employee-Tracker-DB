@@ -76,8 +76,8 @@ function init() {
                 console.log(menu);
                 break;
         }
-        init();
-    })
+    }
+    )
 }
 
 init();
