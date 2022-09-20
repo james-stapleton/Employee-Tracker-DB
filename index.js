@@ -34,7 +34,7 @@ const employeeMenu = [
     }
 ];
 
-const roleMenu = [
+const updateRoleMenu = [
     {
         type: "input",
         name: "oldRole",
@@ -44,6 +44,24 @@ const roleMenu = [
         type: "input",
         name: "newRole",
         message: "New role id?"
+    }
+]
+
+const addRoleMenu = [
+    {
+        type: "input",
+        name: 'title',
+        message: "New role title?"
+    },
+    {
+        type: "input",
+        name: "salary",
+        message: "New role salary?"
+    },
+    {
+        type: "input",
+        name: "department",
+        message: "New role department?" 
     }
 ]
 
@@ -72,7 +90,7 @@ function init() {
                 break; 
             case "Update Employee Role":
                 inquirer
-                .prompt( roleMenu)
+                .prompt( updateRoleMenu)
                 .then(( data ) => {
                 Database.updateEmployeeRole(data.oldRole, data.newRole); 
                 })
@@ -81,7 +99,16 @@ function init() {
                 Database.viewAllRoles();
                 break;
             case "Add Role": 
+                inquirer
+                .prompt( addRoleMenu )
+                .then (( data ) => {
+                    const role = {
+                        title: data.title,
+                        salary: data.salary,
+                        department_id: data.department
+                    }
                 Database.addRole(role);
+                })
                 break;
             case "View All Departments":
                 Database.viewAllDepartments();
