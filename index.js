@@ -34,6 +34,10 @@ const employeeMenu = [
     }
 ];
 
+const roleMenu = [{
+    
+}]
+
 function init() {
     inquirer
     .prompt(menu)
@@ -59,6 +63,11 @@ function init() {
                 break; 
             case "Update Employee Role":
                 Database.updateEmployeeRole(role_id); 
+                inquirer
+                .prompt( roleMenu)
+                .then(( data ) => {
+
+                })
                 break;
             case "View All Roles":
                 Database.viewAllRoles();

@@ -43,5 +43,6 @@ class Database {
 // Database.createEmployee({first_name: "Test2", last_name: "Testerson Sr.", role_id: 2, manager_id: 1});
 
 Database.viewAllRoles();
+console.log(Database.viewAllDepartments());
 
 module.exports = Database;
