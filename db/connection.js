@@ -14,11 +14,5 @@ const connection = mysql.createConnection({
 
 //! const seed = fs.readFileSync("../sql/seeds.sql", {encoding: "UTF-8"})
 
-connection.query(
-    'SELECT * FROM `department`',
-    function(err, results) {
-      console.log(results);
-    }
-  );
 
   module.exports = connection;

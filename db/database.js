@@ -14,4 +14,6 @@ class Database {
 }
 
 // Database.findAllEmployees();
-Database.createEmployee({id: 5, first_name: "Test", last_name: "Testerson", role_id: 2, manager_id: 1});
+// Database.createEmployee({first_name: "Test2", last_name: "Testerson Sr.", role_id: 2, manager_id: 1});
+
+module.exports = Database;
