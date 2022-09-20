@@ -34,9 +34,18 @@ const employeeMenu = [
     }
 ];
 
-const roleMenu = [{
-    
-}]
+const roleMenu = [
+    {
+        type: "input",
+        name: "oldRole",
+        message: "Employee id?"
+    },
+    {
+        type: "input",
+        name: "newRole",
+        message: "New role id?"
+    }
+]
 
 function init() {
     inquirer
@@ -62,11 +71,10 @@ function init() {
                     })
                 break; 
             case "Update Employee Role":
-                Database.updateEmployeeRole(role_id); 
                 inquirer
                 .prompt( roleMenu)
                 .then(( data ) => {
-
+                Database.updateEmployeeRole(data.oldRole, data.newRole); 
                 })
                 break;
             case "View All Roles":

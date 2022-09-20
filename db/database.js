@@ -11,8 +11,9 @@ class Database {
         return this.db.query('INSERT INTO `employee` SET ?', employee)
     }
 
-    static updateEmployeeRole(role_id) {
-        return this.db.query('UPDATE `employee` SET ?', role_id);
+    static updateEmployeeRole(employee_id, role_id) {
+        let queryString = `UPDATE employee SET role_id = ${role_id} WHERE id = ${employee_id}`;
+        return this.db.query(queryString);
     }
 
     static viewAllRoles() {
@@ -41,8 +42,5 @@ class Database {
 // Database.findAllEmployees();
 // console.log(JSON.stringify(Database.findAllEmployees()));
 // Database.createEmployee({first_name: "Test2", last_name: "Testerson Sr.", role_id: 2, manager_id: 1});
-
-Database.viewAllRoles();
-console.log(Database.viewAllDepartments());
 
 module.exports = Database;
