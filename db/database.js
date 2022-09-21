@@ -37,14 +37,9 @@ class Database {
         return this.db.query(queryString);
     }
 
-
     static viewBudget() {
         return this.db.promise().query('SELECT department_id, name, SUM(salary) FROM role JOIN department USING(id) GROUP BY department_id');
     }
 }
-
-// Database.findAllEmployees();
-// console.log(JSON.stringify(Database.findAllEmployees()));
-// Database.createEmployee({first_name: "Test2", last_name: "Testerson Sr.", role_id: 2, manager_id: 1});
 
 module.exports = Database;
