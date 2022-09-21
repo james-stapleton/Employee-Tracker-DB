@@ -117,7 +117,7 @@ function init() {
                 })
                 break;
             case "View All Departments":
-                Database.viewAllDepartments();
+                viewDepartments();
                 break;
             case "Add Department":
                 inquirer
