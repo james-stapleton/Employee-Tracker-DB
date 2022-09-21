@@ -28,3 +28,7 @@ CREATE TABLE employee (
     FOREIGN KEY (role_id)
         REFERENCES role(id)
 );
+
+SELECT first_name, last_name, title
+FROM employee JOIN role ON role.id = employee.role_id
+WHERE employee.role_id = 2;

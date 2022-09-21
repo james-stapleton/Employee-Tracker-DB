@@ -63,7 +63,15 @@ const addRoleMenu = [
         name: "department",
         message: "New role department?" 
     }
-]
+];
+
+const newDepartmentMenu = [
+    {
+        type: "input",
+        name: "name",
+        message: "New department name?"
+    }
+];
 
 function init() {
     inquirer
@@ -71,9 +79,7 @@ function init() {
     .then(( { menu }) => {
         switch (menu) {
             case "View All Employees":
-                Database.viewAllEmployees();
-                console.log(Database.viewAllEmployees());
-                console.log("employees should be found");
+                viewEmployees();
                 break;
             case "Add Employee":
                 inquirer
@@ -96,7 +102,7 @@ function init() {
                 })
                 break;
             case "View All Roles":
-                Database.viewAllRoles();
+                viewRoles();
                 break;
             case "Add Role": 
                 inquirer
@@ -114,7 +120,14 @@ function init() {
                 Database.viewAllDepartments();
                 break;
             case "Add Department":
+                inquirer
+                .prompt (newDepartmentMenu)
+                .then((data) => {
+                    const department = {
+                        name: data.name
+                    }
                 Database.addDepartment(department);
+                })
                 break;
             default:
                 console.log(menu);
@@ -123,5 +136,32 @@ function init() {
     }
     )
 }
+
+function viewEmployees() {
+    Database.viewAllEmployees()
+      .then(([rows]) => {
+        let employees = rows;
+        console.log("\n");
+        console.table(employees);
+      })
+  }
+
+  function viewRoles() {
+    Database.viewAllRoles()
+      .then(([rows]) => {
+        let roles = rows;
+        console.log("\n");
+        console.table(roles);
+      })
+  }
+
+  function viewDepartments() {
+    Database.viewAllDepartments()
+      .then(([rows]) => {
+        let departments = rows;
+        console.log("\n");
+        console.table(departments);
+      })
+  }
 
 init();

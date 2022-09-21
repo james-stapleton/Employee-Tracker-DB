@@ -4,7 +4,7 @@ class Database {
     static db = connection;
 
     static viewAllEmployees() {
-        return this.db.query('SELECT * FROM `department`');
+        return this.db.promise().query("SELECT * FROM `employee`");
     }
 
     static addEmployee(employee) {
@@ -17,13 +17,7 @@ class Database {
     }
 
     static viewAllRoles() {
-        
-        return this.db.query('SELECT * FROM `role`',
-        function(err, results, fields) {
-        //   console.log(results); results contains rows returned by server
-        //   console.log(fields);  fields contains extra meta data about results, if available
-        }
-      );
+        return this.db.promise().query('SELECT * FROM `role`');
     }
 
     static addRole(role) {
@@ -31,7 +25,7 @@ class Database {
     }
 
     static viewAllDepartments() {
-        return this.db.query('SELECT * FROM `department`');
+        return this.db.promise().query('SELECT * FROM `department`');
     }
 
     static addDepartment(department) {
@@ -42,5 +36,7 @@ class Database {
 // Database.findAllEmployees();
 // console.log(JSON.stringify(Database.findAllEmployees()));
 // Database.createEmployee({first_name: "Test2", last_name: "Testerson Sr.", role_id: 2, manager_id: 1});
+
+Database.viewAllEmployees();
 
 module.exports = Database;
