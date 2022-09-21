@@ -7,7 +7,7 @@ const menu = [{
     type: "list",
     name: "menu",
     message: "What would you like to do?",
-    choices: ["View All Employees", "Add Employee", "Update Employee Role", "View All Roles", "Add Role", "View All Departments", "Add Department"]
+    choices: ["View All Employees", "Add Employee", "Update Employee Role", "View All Roles", "Add Role", "View All Departments", "Add Department", "View Budget", "Exit"]
 }];
 
 const employeeMenu = [
@@ -72,6 +72,13 @@ const newDepartmentMenu = [
     }
 ];
 
+const continuePrompt = [{
+    type: "list",
+    name: "cont",
+    message: "Continue?",
+    choices: ["Continue", "Exit"]
+}];
+
 function init() {
     inquirer
     .prompt(menu)
@@ -92,6 +99,7 @@ function init() {
                         }
                     Database.addEmployee(employee);      
                     })
+                continueMenu();
                 break; 
             case "Update Employee Role":
                 inquirer
@@ -99,6 +107,7 @@ function init() {
                 .then(( data ) => {
                 Database.updateEmployeeRole(data.oldRole, data.newRole); 
                 })
+                continueMenu();
                 break;
             case "View All Roles":
                 viewRoles();
@@ -114,6 +123,7 @@ function init() {
                     }
                 Database.addRole(role);
                 })
+                continueMenu();
                 break;
             case "View All Departments":
                 viewDepartments();
@@ -127,10 +137,14 @@ function init() {
                     }
                 Database.addDepartment(department);
                 })
+                continueMenu();
+                break;
+            case "View Budget": 
+                console.log("Selected view budget");
+                viewBudgetDisplay();
                 break;
             default:
-                console.log(menu);
-                break;
+                process.exit();
         }
     }
     )
@@ -143,6 +157,7 @@ function viewEmployees() {
         console.log("\n");
         console.table(employees);
       })
+      continueMenu();
   }
 
   function viewRoles() {
@@ -152,6 +167,7 @@ function viewEmployees() {
         console.log("\n");
         console.table(roles);
       })
+      continueMenu();
   }
 
   function viewDepartments() {
@@ -161,6 +177,30 @@ function viewEmployees() {
         console.log("\n");
         console.table(departments);
       })
+      continueMenu();
+  }
+
+  function viewBudgetDisplay() {
+    Database.viewBudget()
+      .then(([rows]) => {
+        let departments = rows;
+        console.log("\n");
+        console.table(departments);
+      })
+      continueMenu();
+  }
+
+  function continueMenu() {
+    inquirer
+    .prompt(continuePrompt)
+    .then(( { cont }) => {
+        if (cont === "Continue") {
+            init();
+        }
+        else {
+            process.exit();
+        }
+    }) 
   }
 
 init();

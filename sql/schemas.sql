@@ -32,3 +32,7 @@ CREATE TABLE employee (
 SELECT first_name, last_name, title
 FROM employee JOIN role ON role.id = employee.role_id
 WHERE employee.role_id = 2;
+
+SELECT department_id, name, SUM(salary)
+FROM role join department USING(id)
+GROUP BY department_id;
