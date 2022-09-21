@@ -7,7 +7,7 @@ const menu = [{
     type: "list",
     name: "menu",
     message: "What would you like to do?",
-    choices: ["View All Employees", "Add Employee", "Update Employee Role", "View All Roles", "Add Role", "View All Departments", "Add Department", "View Budget", "Update Employee Manager", "Exit"]
+    choices: ["View All Employees", "Add Employee", "Update Employee Role", "View All Roles", "Add Role", "View All Departments", "Add Department", "View Budget", "Update Employee Manager", "Test", "Exit"]
 }];
 
 const employeeMenu = [
@@ -97,6 +97,9 @@ function init() {
     .prompt(menu)
     .then(( { menu }) => {
         switch (menu) {
+            case "Test":
+                employeeArrayGenerator();
+                break;
             case "View All Employees":
                 viewEmployees();
                 break;
@@ -170,6 +173,51 @@ function init() {
     }
     )
 }
+
+function employeeArrayGenerator() {
+    Database.viewEmployeeName()
+    .then(([rows]) => {
+        let employees = rows;
+        console.log("\n");
+        employeeChoices = [];
+        for (let i = 0; i<employees.length; i++) {
+            employeeChoices.push(`${employees[i].first_name} ${employees[i].last_name}`);
+        }
+        console.log(employeeChoices);
+        
+        inquirer
+        .prompt([
+            {
+                type: "list",
+                name: "employeesList",
+                message: "Which employee's role would you like to update?",
+                choices: employeeChoices
+            },
+            {
+                type: "input",
+                name: "newRole",
+                message: "What should this employee's new role ID be?"
+            }
+        ])
+        .then(( { employeesList, newRole }) => {
+            console.log(employeesList);
+            var employeeIndex = employeeChoices.findIndex((element) => employeesList == element);
+            employeeIndex++;
+            Database.updateEmployeeRole(employeeIndex, newRole);
+        })
+
+      })
+    //   continueMenu();
+  }
+
+// const employeeRoleMenu = [
+//     {
+//         type: "list",
+//         name: "employees",
+//         message: "Which employee's role would you like to update?",
+//         choices: employeeChoices
+//     }
+// ]
 
 function viewEmployees() {
     Database.viewAllEmployees()

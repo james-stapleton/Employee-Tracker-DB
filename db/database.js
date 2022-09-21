@@ -40,6 +40,10 @@ class Database {
     static viewBudget() {
         return this.db.promise().query('SELECT department_id, name, SUM(salary) FROM role JOIN department USING(id) GROUP BY department_id');
     }
+
+    static viewEmployeeName() {
+        return this.db.promise().query('SELECT first_name, last_name FROM `employee`');
+    }
 }
 
 module.exports = Database;
