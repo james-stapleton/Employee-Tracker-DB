@@ -7,7 +7,7 @@ const menu = [{
     type: "list",
     name: "menu",
     message: "What would you like to do?",
-    choices: ["View All Employees", "Add Employee", "Update Employee Role", "View All Roles", "Add Role", "View All Departments", "Add Department", "View Budget", "Exit"]
+    choices: ["View All Employees", "Add Employee", "Update Employee Role", "View All Roles", "Add Role", "View All Departments", "Add Department", "View Budget", "Update Employee Manager", "Exit"]
 }];
 
 const employeeMenu = [
@@ -75,9 +75,22 @@ const newDepartmentMenu = [
 const continuePrompt = [{
     type: "list",
     name: "cont",
-    message: "Continue?",
+    message: "Would you like to continue?",
     choices: ["Continue", "Exit"]
 }];
+
+const updateManagerMenu = [
+    {
+        type: "input",
+        name: "employee_id",
+        message: "Employee ID to assign new manager?"
+    },
+    {
+        type: "input",
+        name: "manager_id",
+        message: "New manager ID?"
+    }
+]
 
 function init() {
     inquirer
@@ -97,17 +110,25 @@ function init() {
                             role_id: data.roleID,
                             manager_id: data.managerID
                         }
-                    Database.addEmployee(employee);      
+                    Database.addEmployee(employee);   
+                    continueMenu();   
                     })
-                continueMenu();
                 break; 
             case "Update Employee Role":
                 inquirer
                 .prompt( updateRoleMenu)
                 .then(( data ) => {
-                Database.updateEmployeeRole(data.oldRole, data.newRole); 
-                })
+                Database.updateEmployeeRole(data.oldRole, data.newRole);
+                console.log("Role updated!");
                 continueMenu();
+                })
+                break;
+            case "Update Employee Manager":
+                inquirer
+                .prompt( updateManagerMenu)
+                .then(( data ) => {
+                Database.updateEmployeeManager(data.employee_id, data.manager_id); 
+                })
                 break;
             case "View All Roles":
                 viewRoles();
@@ -122,8 +143,8 @@ function init() {
                         department_id: data.department
                     }
                 Database.addRole(role);
-                })
                 continueMenu();
+                })
                 break;
             case "View All Departments":
                 viewDepartments();
@@ -136,8 +157,8 @@ function init() {
                         name: data.name
                     }
                 Database.addDepartment(department);
-                })
                 continueMenu();
+                })
                 break;
             case "View Budget": 
                 console.log("Selected view budget");

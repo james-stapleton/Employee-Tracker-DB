@@ -32,6 +32,11 @@ class Database {
         return this.db.query('INSERT INTO `department` SET ?', department);
     }
 
+    static updateEmployeeManager(employee_id, manager_id) {
+        let queryString = `UPDATE employee SET manager_id = ${manager_id} WHERE id = ${employee_id}`;
+        return this.db.query(queryString);
+    }
+
     static viewBudget() {
         return this.db.promise().query('SELECT department_id, name, SUM(salary) FROM role JOIN department USING(id) GROUP BY department_id');
     }
