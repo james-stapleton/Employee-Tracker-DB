@@ -1,8 +1,7 @@
 const inquirer = require("inquirer");
 const sql = require("mysql2");
 const Database = require("./db/database");
-// const Database = require("./db/database");
-// const connection = require("./db/connection");
+const consoleTable = require("console.table");
 
 const menu = [{
     type: "list",
