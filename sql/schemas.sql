@@ -36,3 +36,7 @@ WHERE employee.role_id = 2;
 SELECT department_id, name, SUM(salary)
 FROM role join department USING(id)
 GROUP BY department_id;
+
+SELECT first_name, last_name, manager_id
+FROM employee
+ORDER BY manager_id;

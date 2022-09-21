@@ -37,6 +37,7 @@ class Database {
         return this.db.query(queryString);
     }
 
+
     static viewBudget() {
         return this.db.promise().query('SELECT department_id, name, SUM(salary) FROM role JOIN department USING(id) GROUP BY department_id');
     }
